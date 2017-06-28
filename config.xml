@@ -1,0 +1,4 @@
+<aplicacao>
+	<arquivoDaArena nome="arena" tipo="svg" caminho="/home/thaylo/Área de Trabalho/CG/carro/LeWildTrabReborn/"></arquivoDaArena>
+	<carro velTiro="5"></carro>
+</aplicacao>
