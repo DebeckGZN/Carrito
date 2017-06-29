@@ -129,7 +129,7 @@ void display(){
 
 ///////////chassi
 		glPushMatrix();
-			desenhaQuadrilatero( carrito.chassi.altura, carrito.chassi.largura, 1, 1, 0);
+			desenhaQuadrilatero( carrito.chassi.altura, carrito.chassi.largura, 0, 1, 0);
 		glPopMatrix();
 
 //////////listra
