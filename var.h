@@ -36,7 +36,10 @@ typedef struct{
 	float raio;
 	float speed;
 }tiro;
+
 std::vector<tiro> tiros;
+
+std::vector<tiro> tiro_Inimigo;
 
 circ maior, menor, enm1, enm2, enm3, player;
 car carrito;
@@ -85,3 +88,6 @@ void mouse(int botao, int estado, int x, int y);
 tiro novo_tiro(void);
 void cria_tiro(void);
 void remove_tiro(int i);
+tiro novo_tiro_Inimigo(void);
+void cria_tiro_Inimigo(void);
+void Timer(int value);

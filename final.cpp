@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
         glutKeyboardFunc(keyPressed);
         glutKeyboardUpFunc(keyUp);
         glutPassiveMotionFunc( passiveMotion );
+        glutTimerFunc(800,Timer,1);
         glutMouseFunc( mouse );
 
     	glutMainLoop();

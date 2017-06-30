@@ -190,14 +190,14 @@ void parseSVG(char* argv){
 
 				carrito.chassi.altura = atof(attr)*4/3;
 				carrito.chassi.largura = atof(attr)*2/3;
-				carrito.canhao.altura = atof(attr)*1/2;
+				carrito.canhao.altura = atof(attr)*1/3;
 				carrito.canhao.largura = atof(attr)*4/30;
 				for(i = 0; i<4; i++){
 						carrito.rodas[i].altura = atof(attr)*1/2;
 						carrito.rodas[i].largura = atof(attr)*1/3;
 
-						carrito.farois[i].altura = atof(attr)*1/5;
-						carrito.farois[i].largura = atof(attr)*3/10;
+						carrito.farois[i].altura = atof(attr)*1/6;
+						carrito.farois[i].largura = atof(attr)*1/5;
 				}
 				for(i = 0; i<2; i++){
 						carrito.eixos[i].altura = atof(attr)*1/4;

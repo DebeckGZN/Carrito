@@ -129,7 +129,7 @@ void display(){
 
 ///////////chassi
 		glPushMatrix();
-			desenhaQuadrilatero( carrito.chassi.altura, carrito.chassi.largura, 0, 1, 0);
+			desenhaQuadrilatero( carrito.chassi.altura, carrito.chassi.largura, 1, 1, 0);
 		glPopMatrix();
 
 //////////listra
@@ -141,6 +141,7 @@ void display(){
 
 	glPopMatrix();
 	cria_tiro();
+	cria_tiro_Inimigo();
 ////////"inimigos"
 	desenhaCirculo(enm1.xy[0],enm1.xy[1],360,enm1.raio,enm1.rgb[0],enm1.rgb[1],enm1.rgb[2]);
 	desenhaCirculo(enm2.xy[0],enm2.xy[1],360,enm2.raio,enm2.rgb[0],enm2.rgb[1],enm2.rgb[2]);
@@ -304,6 +305,18 @@ tiro novo_tiro(void){
     return t;
 }
 
+tiro novo_tiro_Inimigo(void){
+    tiro t;
+	t.speed = 30;
+	t.raio = player.raio*1/10;
+	t.angulo = 90;
+	//t.x = enm1.xy[0];
+	//t.y = enm1.xy[1];
+    t.x = dx - cos(angCarro*M_PI/180.0)*(carrito.chassi.altura/2) + cos((t.angulo)*M_PI/180.0)*carrito.canhao.altura;
+    t.y = dy - sin(angCarro*M_PI/180.0)*(carrito.chassi.altura/2) + sin((t.angulo)*M_PI/180.0)*carrito.canhao.altura;
+    return t;
+}
+
 void mouse(int botao, int estado, int x, int y)
 {
 
@@ -328,7 +341,24 @@ void cria_tiro(void){
           	tiros[i].x += cos(tiros[i].angulo * M_PI / 180.0)*tiros[i].speed;
           	tiros[i].y += sin(tiros[i].angulo * M_PI / 180.0)*tiros[i].speed;
 
-						remove_tiro(i);
+			remove_tiro(i);
+        }
+    }
+    glutPostRedisplay();      
+}
+
+void cria_tiro_Inimigo(void){
+
+    if(!tiro_Inimigo.empty()){
+        for(int i = 0; i < tiro_Inimigo.size(); i++){
+            glPushMatrix();
+                glTranslatef(tiro_Inimigo[i].x, tiro_Inimigo[i].y, 0);
+                desenhaCirculo(enm1.xy[0],enm1.xy[1],360,tiro_Inimigo[i].raio,0,1,0);
+            glPopMatrix();
+            //caminho que os tiros vao seguir
+           	tiro_Inimigo[i].x+= 2;
+           	tiro_Inimigo[i].y += 2;
+           				//remove_tiro(i);
         }
     }
     glutPostRedisplay();      
@@ -352,4 +382,13 @@ void remove_tiro(int i){
 	|| enemyIsNear(enm3.xy[0],enm3.xy[1],tx,ty) < distEnemy){
 		tiros.erase(tiros.begin()+i);
 	}
+}
+
+void Timer(int value)
+{
+	// ** Altere aqui a(s) variável(is) responsável(is) pelo movimento da "borboleta"
+	tiro_Inimigo.push_back(novo_tiro_Inimigo());
+	glutPostRedisplay();
+	glutTimerFunc(120,Timer, 1);
+
 }
